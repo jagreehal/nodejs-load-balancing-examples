@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "pm2_api",
+      "script": "dist/index.js",
+      "watch": ["dist"],
+      "instances": "max",
+      "exec_mode": "cluster"
+    }
+  ]
+}

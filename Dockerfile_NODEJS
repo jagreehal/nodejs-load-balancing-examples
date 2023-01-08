@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+WORKDIR /usr
+
+# enable the line for reloads
+# RUN npm install nodemon -g
+
+COPY package.json ./
+
+RUN npm install --omit=dev
+
+COPY ./dist/ ./dist/
+
+ARG PORT=5001
+EXPOSE ${PORT}
+
+CMD [ "npm", "start" ]
