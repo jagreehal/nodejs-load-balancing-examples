@@ -8,10 +8,16 @@ import { logger } from './utils/logger';
 const PORT = getEnv('PORT', Number);
 const HOST = getEnv('HOST', String);
 
-process.on('SIGINT', () => {
-  logger.info(`app:${id} is shutting down`);
-  process.exit(0);
-});
+// PM2 messes about with node internals so the below do NOT work as expected
+// process.on('uncaughtException', async (err, origin) => {
+//   logger.error(err, `uncaughtException app:${id} is shutting down`);
+//   process.exit(0);
+// });
+
+// process.on('unhandledRejection', async (reason, promise) => {
+//   logger.error(reason, `uncaughtException app:${id} is shutting down`);
+//   process.exit(0);
+// });
 
 async function start() {
   const app = createApp();

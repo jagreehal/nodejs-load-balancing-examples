@@ -1,32 +1,41 @@
+### PM2 API
+
 GET http://localhost:5000
 
-###
+### PM2 API BOOM
 
 GET http://localhost:5000/boom
 
-###
+### PM2 NGNIX 
+ GET http://localhost:8080
+
+### PM2 NGNIX BOOM
+
+GET http://localhost:8080/boom
+
+### NODE API_1
 
 GET http://localhost:5001
 
-###
+### NODE API_1 BOOM
 
 GET http://localhost:5001/boom
 
-###
+### NODE API_2
 
 GET http://localhost:5002
 
-###
+### NODE API_2 BOOM
 
 GET http://localhost:5002/boom
 
-###
+### NODE NGNIX API
 
-GET http://localhost:8080
+GET http://localhost:8081
 
-###
+### NODE NGNIX API BOOM
 
-GET http://localhost:8080/boom
+GET http://localhost:8081/boom
 
 ###
 
