@@ -6,10 +6,15 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "start": "node dist/index.js",
     "dev": "ts-node-dev  --inspect --no-notify --transpile-only --respawn -- src/index.ts",
-    "lint": "eslint --ext .js,.ts .",
+    "docker.build": "docker build --no-cache --file Dockerfile_NODEJS -t nodejs-load-balancing-example-k8:v1 .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "lint": "eslint --ext .js,.ts .",
+    "kube.delete": "kubectl delete deployment nodejs-load-balancing-example-k8-deployment && kubectl delete svc nodejs-load-balancing-example-k8-service",
+    "kube.deploy": "kubectl apply -f deployment.yaml",
+    "kube.service": "kubectl apply -f service.yaml",
+    "kube.launch": "minikube service nodejs-load-balancing-example-k8",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -28,13 +33,14 @@
     "express-pino-logger": "^7.0.0",
     "pino": "^8.8.0",
     "pino-http": "^8.3.1",
-    "pino-pretty": "^9.1.1"
+    "pino-pretty": "^9.1.1",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@types/express": "4.17.15",
     "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",

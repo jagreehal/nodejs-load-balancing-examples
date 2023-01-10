@@ -2,11 +2,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { createApp } from './app';
 import { id } from './utils/create-id';
-import { getEnv } from './utils/get-env';
 import { logger } from './utils/logger';
+import * as z from 'zod';
 
-const PORT = getEnv('PORT', Number);
-const HOST = getEnv('HOST', String);
+const envSchema = z.object({
+  PORT: z.number().int().min(1).max(65535),
+  HOST: z.string(),
+});
+
+const { PORT, HOST } = envSchema.parse(process.env);
 
 // PM2 messes about with node internals so the below do NOT work as expected
 // process.on('uncaughtException', async (err, origin) => {
@@ -27,5 +31,5 @@ async function start() {
 }
 
 start().then(() => {
-  logger.info(`app:${id} is running at http://localhost:${PORT}`);
+  logger.info(`app:${id} is running at http://${HOST}:${PORT}`);
 });
